@@ -27,7 +27,20 @@ public class MapSettings : MonoBehaviour
         GameData.Instance.MapHeight = int.Parse(height.text);
         gameObject.SetActive(false);
         //暂时使用Resources加载，TODO: 使用AssetBundle加载资源
+        InitGridMap();
+        InitGridTypeSettings();
+    }
+
+    public void InitGridMap()
+    {
         GameObject buffer = ResourcesMgr.Instance.Load<GameObject>("Prefabs/AStar/GridMap");
         GameObject.Instantiate(buffer);
+    }
+
+    public void InitGridTypeSettings()
+    {
+        GameObject buffer = ResourcesMgr.Instance.Load<GameObject>("Prefabs/AStar/GridTypeSettings");
+        GameObject obj = GameObject.Instantiate(buffer,transform.parent);
+        obj.SetActive(true);
     }
 }

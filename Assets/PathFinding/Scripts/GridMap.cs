@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,17 +37,23 @@ public class GridMap : MonoBehaviour
     {
         mapWidth = GameData.Instance.MapWidth;
         mapHeight = GameData.Instance.MapHeight;
-        map = new GridType[mapWidth,mapHeight];      
+        map = new GridType[mapWidth,mapHeight];   
     }
 
     private void Start()
+    {
+        InitMap();
+    }
+
+
+    private void InitMap()
     {
         for (int i = 0; i < mapWidth; i++)
         {
             for (int j = 0; j < mapHeight; j++)
             {
                 map[i, j] = GridType.None;
-                GameObject obj = GameObject.Instantiate(grid.gameObject,transform);
+                GameObject obj = GameObject.Instantiate(grid.gameObject, transform);
                 obj.transform.position = new Vector3(grid.width * i, grid.width * j, grid.gameObject.transform.position.z);
                 obj.SetActive(true);
             }
